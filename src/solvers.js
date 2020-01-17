@@ -16,10 +16,44 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
+  var solution = new Board({'n': n});
+  var countOfRooks = 0;
+  // hasAnyRooksConflicts will return if there is row or column conflict
+  // use togglePiece to put piece on or take off
+  // input is n (n*n board and number of rooks)
+  // output - an array of arrays [[1, 0, 0, 0], [0, 1, 0,0] etc...]
+  // create a variable holding a new Board
+  // create a variable countOfRooks to count how many rooks have been placed so far
+  // use recursive function inside to togglePiece and see if conflict happens
+  // if there's no conflict, then togglePiece, call function again and increase countOfRooks to place next rook until we have n rooks on board
+  // base case is when countOfRooks === n, return board
+  // keep running recursive function, if there's a conflict, then untoggle it (and decrease countOfRooks?)
 
-  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution;
+  // recursive function:
+  var addRook = function(colIndex, rowIndex) {
+    // base case:
+    if (countOfRooks === n) {
+      return solution;
+    }
+
+    // when do we recurse?
+    solution.togglePiece(colIndex, rowIndex);
+
+    if (solution.hasAnyRooksConflicts()){
+      solution.togglePiece(colIndex, rowIndex);
+    } else {
+      countOfRooks++;
+      colIndex++;
+      rowIndex++;
+      addRook(colIndex, rowIndex);
+    }
+
+  }
+
+  addRook(0, 0);
+
+  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution.rows()));
+  return solution.rows();
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
