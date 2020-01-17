@@ -58,7 +58,36 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0; 
+  var board = new Board({'n': n});
+  var countOfRooks = 0;
+
+  var addRook = function(row) {
+
+  // base case is when we are on last row, we increment solutionCount and exit out
+  // there must be one rook on each row, but we keep track of Rooks by a counter variable 
+    if (countOfRooks === n) {
+      solutionCount++;
+    } else {
+      // loops through column
+      // togglePiece for each column index
+      // if there's no column conflict, run addRook again on next row ( ie row + 1) until board is filled
+      // untoggle if there's column conflict and try next column
+
+      for (var col = 0; col < n; col++) { 
+        debugger; // loops thru column on that row 
+        board.togglePiece(row, col); // toggles Rook
+        countOfRooks++; // increase countOfRooks with each rook placed
+        if (!board.hasColConflictAt(col)) { // if there's no column conflict, place the next rook 
+          addRook(row + 1); // place next rook on the next row 
+        }
+        board.togglePiece(row, col); // if there's a column conflict, untoggle
+        countOfRooks--; // decrease countOfRooks and try again on next column 
+      }
+    }
+  }
+
+  addRook(0); // start search at 0th row 
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
