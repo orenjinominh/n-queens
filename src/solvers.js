@@ -14,7 +14,7 @@
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
 
-
+// time complexity - linear
 window.findNRooksSolution = function(n) {
   var solution = new Board({'n': n});
   var countOfRooks = 0;
@@ -30,6 +30,7 @@ window.findNRooksSolution = function(n) {
   // keep running recursive function, if there's a conflict, then untoggle it (and decrease countOfRooks?)
 
   // recursive function:
+
   var addRook = function(colIndex, rowIndex) {
     // base case:
     if (countOfRooks === n) {
@@ -57,6 +58,7 @@ window.findNRooksSolution = function(n) {
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
+// time complexity is O(n^n)
 window.countNRooksSolutions = function(n) {
   var solutionCount = 0;
   var board = new Board({'n': n});
@@ -93,6 +95,7 @@ window.countNRooksSolutions = function(n) {
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
+// time complexity is quadratic
 window.findNQueensSolution = function(n) {
 
   // use hasAnyQueensConflicts() to check if there's conflict
