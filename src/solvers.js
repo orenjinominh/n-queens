@@ -98,7 +98,8 @@ window.findNQueensSolution = function(n) {
   // use hasAnyQueensConflicts() to check if there's conflict
   var board = new Board({'n': n});
   var solution = board.rows();
-  var count = 0;
+  var found = false;
+  //var count = 0;
   // var countOfQueens = 0;
 
   // recursive function
@@ -107,33 +108,28 @@ window.findNQueensSolution = function(n) {
   // board.togglePiece(row, col)
   // increase countOfQueens
   // if (!board.hasAnyQueensConflicts()) then run addQueen(row + 1)
-  var addQueen = function(col, row) {
+  var addQueen = function(row) {
     //debugger;
-    if (n === 0 || n === 2 || n === 3) {
-      return [];
-    }
 
-    if (count === n) {
-      solution = board.rows();
-      return;
+    if (row === n) {
+      found = true;
     } else {
       for (var col = 0; col < n; col++) {
         board.togglePiece(row, col);
-        count++;
-        // countOfQueens++;
+
         if (!board.hasAnyQueensConflicts()) {
           addQueen(row + 1);
-        } else {
-        board.togglePiece(row, col);
-        count--;
         }
+        if (found) {
+          return;
+        }
+        board.togglePiece(row, col);
 
-          // countOfQueens--;
       }
     }
   }
 
-  addQueen(1, 0);
+  addQueen(0);
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
@@ -144,9 +140,7 @@ window.findNQueensSolution = function(n) {
 window.countNQueensSolutions = function(n) {
   var solutionCount = 0; //fixme
 
-  var solution = new Board({'n': n});
-  var countOfQueens = 0;
-
+  var board = new Board({'n': n});
 
   // recursive function
   // base case is when countOfQueens === n, return solution
@@ -155,20 +149,21 @@ window.countNQueensSolutions = function(n) {
   // increase countOfQueens
   // if (!board.hasAnyQueensConflicts()) then run addQueen(row + 1)
 
-  var addQueen = function(col) {
-    if (countOfQueens === n) {
+  var addQueen = function(row) {
+    if (row === n) {
       solutionCount++;
+      return;
     } else {
 
-      for (var row = 0; row < n; row ++) {
-        solution.togglePiece(row, col);
-        countOfQueens++;
-        if (!solution.hasAnyQueensConflicts()) {
-          addQueen(col + 1);
-        } else {
-          solution.togglePiece(row, col);
-          countOfQueens--;
+      for (var col = 0; col < n; col ++) {
+        board.togglePiece(row, col);
+
+        if (!board.hasAnyQueensConflicts()) {
+          addQueen(row+1);
         }
+        board.togglePiece(row, col);
+
+
       }
     }
   }
