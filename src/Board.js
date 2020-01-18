@@ -78,6 +78,8 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+
+    //time complexity is linear;
     hasRowConflictAt: function(rowIndex) {
       var counter = 0;
       var boardRow = this.get(rowIndex);
@@ -95,6 +97,7 @@
     },
 
     // test if any rows on this board contain conflicts
+    // time cpmplexity quadratic
     hasAnyRowConflicts: function() {
 
       var counter = 0;
@@ -124,6 +127,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
+    // time complexity - linear;
     hasColConflictAt: function(colIndex) {
 
       var counter = 0;
@@ -141,6 +145,7 @@
     },
 
     // test if any columns on this board contain conflicts
+    // time complexity - quadratic
     hasAnyColConflicts: function() {
 
       var boardRows = this.rows();
@@ -159,6 +164,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
+    // time complexity - linear
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
 
 
@@ -197,6 +203,7 @@
 
 
     // test if any major diagonals on this board contain conflicts
+    // time complexity - quadratic
     hasAnyMajorDiagonalConflicts: function() {
 
       var boardRows = this.rows();
@@ -217,6 +224,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
+    // time complexity - linear
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       // increase row and decrease column- starting from top right
       var boardRows = this.rows();
@@ -247,6 +255,7 @@
     },
 
     // test if any minor diagonals on this board contain conflicts
+    // time complexity - quadratic
     hasAnyMinorDiagonalConflicts: function() {
 
       var boardRows = this.rows();
