@@ -140,6 +140,7 @@ window.findNQueensSolution = function(n) {
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
+// time complexity - quadratic
 window.countNQueensSolutions = function(n) {
   var solutionCount = 0; //fixme
 
